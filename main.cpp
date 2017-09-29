@@ -2,6 +2,7 @@
 #include "Code.h"
 #include <ctime>
 #include <cmath>
+#include <algorithm>
 #include <unordered_set>
 #include <vector>
 
@@ -14,11 +15,18 @@ int main() {
     for (int i = 0; i < size; ++i) {
         searchSpace[i] = Code(i, i);
     }
+    /* std::sort(searchSpace.begin(),searchSpace.end(),
+              [](Code &lhs,Code &rhs){return lhs.getPreference() > rhs.getPreference();}); */
+
     Monte_Karlo(searchSpace,10);
 
     return 0;
 }
 
+
+//!
+//! \param sSpace
+//! \param N
 void Monte_Karlo(std::vector<Code>& sSpace, int N)
 {
     srand((unsigned int)time(nullptr));
@@ -51,6 +59,6 @@ void Monte_Karlo(std::vector<Code>& sSpace, int N)
         std::cout << "Si = " << sSpace[curr] << std::endl;
         std::cout << "--------------------" << std::endl;
     }
-    std::cout << clock() / 1000.0;
+    // std::cout << clock() / 1000.0;
 
 }

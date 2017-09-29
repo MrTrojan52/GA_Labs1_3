@@ -1,10 +1,8 @@
 //
 // Created by Trojan on 27.09.2017.
 //
-
 #ifndef GA_LABS1_3_CODE_H
 #define GA_LABS1_3_CODE_H
-
 
 #include <ostream>
 
@@ -16,7 +14,6 @@ class Code {
 public:
     static const int L = 5;
     static int hammingDistance(Code& lhs, Code& rhs);
-
 
     int getPreference() const;
 
@@ -43,7 +40,8 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const Code &code);
 
-};
+    bool operator<(const Code &rhs) const;
 
+};
 
 #endif //GA_LABS1_3_CODE_H

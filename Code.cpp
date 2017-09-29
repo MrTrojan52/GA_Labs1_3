@@ -67,3 +67,9 @@ int Code::hammingDistance(Code &lhs, Code &rhs) {
     return cnt;
 }
 
+bool Code::operator<(const Code &rhs) const {
+    return preference < rhs.preference;
+}
+
+
+
