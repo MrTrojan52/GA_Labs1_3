@@ -5,6 +5,7 @@
 #define GA_LABS1_3_CODE_H
 
 #include <ostream>
+#include <vector>
 
 class Code {
 
@@ -39,7 +40,8 @@ public:
     };
 
     friend std::ostream &operator<<(std::ostream &os, const Code &code);
-
+    std::vector<Code> getOmega(std::vector<Code>& sSpace);
+    bool operator!=(const Code &rhs)const;
     bool operator<(const Code &rhs) const;
 
 };
