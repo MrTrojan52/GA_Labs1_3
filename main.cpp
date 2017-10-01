@@ -4,12 +4,15 @@
 #include <cmath>
 #include <algorithm>
 #include <unordered_set>
-#include <vector>
 
+
+/* Algorithms */
 void Monte_Karlo(std::vector<Code>& sSpace, int N);
 void Hill_Climbing_depth(std::vector<Code>& sSpace, int N);
 void Hill_Climbing_width(std::vector<Code>& sSpace, int N);
+
 void printOmega(std::vector<Code> &Omega);
+
 int main() {
    const auto size = (unsigned int)pow((float)2,Code::L);
 
@@ -18,21 +21,21 @@ int main() {
         searchSpace[i] = Code(i, i);
     }
 
-   // Monte_Karlo(searchSpace,10);
+    Monte_Karlo(searchSpace,10);
 
-    for (int i = 0; i < size; ++i) {
+   /* for (int i = 0; i < size; ++i) {
         int x = searchSpace[i].getDecNum();
         searchSpace[i].setPreference((x - size / 2) * (x - size / 2));
     }
-   // Hill_Climbing_depth(searchSpace, 5);
+    Hill_Climbing_depth(searchSpace, 5);
+    */
+
+    /*
     for (int i = 0; i < size; ++i) {
         searchSpace[i].setPreference(rand() % 201);
     }
     Hill_Climbing_width(searchSpace, 5);
-
-
-
-
+    */
     return 0;
 }
 
@@ -65,7 +68,6 @@ void Monte_Karlo(std::vector<Code>& sSpace, int N)
 
             maxS = sSpace[curr];
             std::cout << "maxS ---> maxS = " << maxS << std::endl << std::endl;
-
         }
 
         std::cout << "max = " << max << std::endl;
@@ -77,8 +79,6 @@ void Monte_Karlo(std::vector<Code>& sSpace, int N)
     std::cout << "\n\n------------------" << std::endl;
     std::cout << "maxS = " << maxS << "\nmax = " << max << std::endl;
     std::cout << "------------------" << std::endl;
-    // std::cout << clock() / 1000.0;
-
 }
 
 //!
@@ -124,7 +124,6 @@ void Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
                 printOmega(Omega);
                 std::cout << std::endl;
             }
-
         }
         else
             break;
@@ -132,7 +131,6 @@ void Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
     std::cout << "\n\n------------------" << std::endl;
     std::cout << "maxS = " << maxS << "\nmax = " << max << std::endl;
     std::cout << "------------------" << std::endl;
-
 }
 
 //!
@@ -182,8 +180,6 @@ void Hill_Climbing_width(std::vector<Code>& sSpace, int N)
             }
             else
                 break;
-
-
         }
         else
             break;
