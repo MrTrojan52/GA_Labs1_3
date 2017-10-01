@@ -42,7 +42,7 @@ int main() {
 //! \param N
 void Monte_Karlo(std::vector<Code>& sSpace, int N)
 {
-    if(sSpace.size() <= 0) return;
+    if(sSpace.empty()) return;
     srand((unsigned int)time(nullptr));
     Code maxS;
     int max = 0;
@@ -85,7 +85,7 @@ void Monte_Karlo(std::vector<Code>& sSpace, int N)
 //! \param sSpace
 //! \param N
 void Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
-{   if(sSpace.size() <= 0) return;
+{   if(sSpace.empty()) return;
     srand((unsigned int)time(nullptr));
     int i = 0;
     int curr = rand() % sSpace.size();
@@ -140,7 +140,7 @@ void Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
 //! \param N
 void Hill_Climbing_width(std::vector<Code>& sSpace, int N)
 {
-    if(sSpace.size() <= 0) return;
+    if(sSpace.empty()) return;
     srand((unsigned int)time(nullptr));
     int i = 0;
     Code maxS = sSpace[rand() % sSpace.size()];
@@ -194,7 +194,7 @@ void Hill_Climbing_width(std::vector<Code>& sSpace, int N)
 }
 
 void printOmega(std::vector<Code> &Omega)
-{   if(Omega.size() > 0) {
+{   if(!Omega.empty()) {
         std::cout << '[';
         for (int i = 0; i < Omega.size() - 1; ++i) {
             std::cout << Omega[i] << " : " << Omega[i].getPreference() << ", ";
