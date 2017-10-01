@@ -8,6 +8,7 @@
 
 void Monte_Karlo(std::vector<Code>& sSpace, int N);
 void Hill_Climbing_depth(std::vector<Code>& sSpace, int N);
+void Hill_Climbing_width(std::vector<Code>& sSpace, int N);
 void printOmega(std::vector<Code> &Omega);
 int main() {
    const auto size = (unsigned int)pow((float)2,Code::L);
@@ -17,15 +18,18 @@ int main() {
         searchSpace[i] = Code(i, i);
     }
 
-    Monte_Karlo(searchSpace,10);
+   // Monte_Karlo(searchSpace,10);
 
     for (int i = 0; i < size; ++i) {
         int x = searchSpace[i].getDecNum();
         searchSpace[i].setPreference((x - size / 2) * (x - size / 2));
     }
    // Hill_Climbing_depth(searchSpace, 5);
-    /* std::sort(searchSpace.begin(),searchSpace.end(),
-              [](Code &lhs,Code &rhs){return lhs.getPreference() > rhs.getPreference();}); */
+    for (int i = 0; i < size; ++i) {
+        searchSpace[i].setPreference(rand() % 201);
+    }
+    Hill_Climbing_width(searchSpace, 5);
+
 
 
 
@@ -77,6 +81,9 @@ void Monte_Karlo(std::vector<Code>& sSpace, int N)
 
 }
 
+//!
+//! \param sSpace
+//! \param N
 void Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
 {   if(sSpace.size() <= 0) return;
     srand((unsigned int)time(nullptr));
@@ -126,6 +133,64 @@ void Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
     std::cout << "maxS = " << maxS << "\nmax = " << max << std::endl;
     std::cout << "------------------" << std::endl;
 
+}
+
+//!
+//! \param sSpace
+//! \param N
+void Hill_Climbing_width(std::vector<Code>& sSpace, int N)
+{
+    if(sSpace.size() <= 0) return;
+    srand((unsigned int)time(nullptr));
+    int i = 0;
+    Code maxS = sSpace[rand() % sSpace.size()];
+    Code Si = maxS;
+    std::vector<Code> Omega = maxS.getOmega(sSpace);
+    int max = maxS.getPreference();
+
+    while(i < N)
+    {
+        i++;
+        std::cout << "------------------" << std::endl;
+        std::cout << "i = " << i << std::endl;
+        std::cout << "maxS = " << maxS << std::endl;
+        std::cout << "max = " << max << std::endl;
+        std::cout << "Si = " << Si << std::endl;
+        std::cout << "Omega = ";
+        printOmega(Omega);
+        std::cout << std::endl;
+        if(!Omega.empty())
+        {
+            std::sort(Omega.begin(),Omega.end(),
+                      [](Code &lhs,Code &rhs){return lhs.getPreference() > rhs.getPreference();});
+
+            Si =  Omega[0];
+            std::cout << "Si ---> Si = " << Si << std::endl;
+
+
+            if(max < Si.getPreference())
+            {
+                maxS = Si;
+                max = maxS.getPreference();
+                Omega = maxS.getOmega(sSpace);
+                std::cout << std::endl;
+                std::cout << "maxS ---> maxS = " << maxS << std::endl;
+                std::cout << "max ---> max = " << max << std::endl;
+                std::cout << "Omega ---> Omega = ";
+                printOmega(Omega);
+                std::cout << std::endl;
+            }
+            else
+                break;
+
+
+        }
+        else
+            break;
+    }
+    std::cout << "\n\n------------------" << std::endl;
+    std::cout << "maxS = " << maxS << "\nmax = " << max << std::endl;
+    std::cout << "------------------" << std::endl;
 }
 
 void printOmega(std::vector<Code> &Omega)
