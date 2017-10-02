@@ -7,14 +7,14 @@
 
 
 /* Algorithms */
-void Monte_Karlo(std::vector<Code>& sSpace, int N);
-void Hill_Climbing_depth(std::vector<Code>& sSpace, int N);
-void Hill_Climbing_width(std::vector<Code>& sSpace, int N);
+Code Monte_Karlo(std::vector<Code>& sSpace, int N);
+Code Hill_Climbing_depth(std::vector<Code>& sSpace, int N);
+Code Hill_Climbing_width(std::vector<Code>& sSpace, int N);
 
 void printOmega(std::vector<Code> &Omega);
 
 int main() {
-
+    Code maxS;
     const auto size = (unsigned int)pow((float)2,Code::getLength());
 
     std::vector<Code> searchSpace(size);
@@ -22,20 +22,20 @@ int main() {
         searchSpace[i] = Code(i, i);
     }
 
-    Monte_Karlo(searchSpace,10);
-
-   /*for (int i = 0; i < size; ++i) {
+    maxS = Monte_Karlo(searchSpace,10);
+    /*
+    for (int i = 0; i < size; ++i) {
         int x = searchSpace[i].getDecNum();
         searchSpace[i].setPreference((x - size / 2) * (x - size / 2));
     }
-    Hill_Climbing_depth(searchSpace, 5);
+    maxS = Hill_Climbing_depth(searchSpace, 5);
     */
 
     /*
     for (int i = 0; i < size; ++i) {
         searchSpace[i].setPreference(rand() % 201);
     }
-    Hill_Climbing_width(searchSpace, 5);
+    maxS = Hill_Climbing_width(searchSpace, 5);
     */
     return 0;
 }
@@ -44,9 +44,9 @@ int main() {
 //!
 //! \param sSpace
 //! \param N
-void Monte_Karlo(std::vector<Code>& sSpace, int N)
+Code Monte_Karlo(std::vector<Code>& sSpace, int N)
 {
-    if(sSpace.empty()) return;
+    if(sSpace.empty()) return {};
     srand((unsigned int)time(nullptr));
     Code maxS;
     int max = 0;
@@ -80,13 +80,14 @@ void Monte_Karlo(std::vector<Code>& sSpace, int N)
     std::cout << "\n\n------------------" << std::endl;
     std::cout << "maxS = " << maxS << "\nmax = " << max << std::endl;
     std::cout << "------------------" << std::endl;
+    return maxS;
 }
 
 //!
 //! \param sSpace
 //! \param N
-void Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
-{   if(sSpace.empty()) return;
+Code Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
+{   if(sSpace.empty()) return {};
     srand((unsigned int)time(nullptr));
     int i = 0;
     int curr = rand() % sSpace.size();
@@ -132,14 +133,15 @@ void Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
     std::cout << "\n\n------------------" << std::endl;
     std::cout << "maxS = " << maxS << "\nmax = " << max << std::endl;
     std::cout << "------------------" << std::endl;
+    return maxS;
 }
 
 //!
 //! \param sSpace
 //! \param N
-void Hill_Climbing_width(std::vector<Code>& sSpace, int N)
+Code Hill_Climbing_width(std::vector<Code>& sSpace, int N)
 {
-    if(sSpace.empty()) return;
+    if(sSpace.empty()) return {};
     srand((unsigned int)time(nullptr));
     int i = 0;
     Code maxS = sSpace[rand() % sSpace.size()];
@@ -188,6 +190,7 @@ void Hill_Climbing_width(std::vector<Code>& sSpace, int N)
     std::cout << "\n\n------------------" << std::endl;
     std::cout << "maxS = " << maxS << "\nmax = " << max << std::endl;
     std::cout << "------------------" << std::endl;
+    return maxS;
 }
 
 void printOmega(std::vector<Code> &Omega)
