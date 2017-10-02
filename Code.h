@@ -11,11 +11,13 @@ class Code {
 
     int decNum;
     int preference;
-
+    static int L;
 public:
-    static const int L = 5;
+
     static int hammingDistance(Code& lhs, Code& rhs);
 
+    static int getLength();
+    static void setLength(int len);
     int getPreference() const;
 
     void setPreference(int preference);
