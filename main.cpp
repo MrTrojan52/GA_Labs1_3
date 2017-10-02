@@ -14,7 +14,8 @@ void Hill_Climbing_width(std::vector<Code>& sSpace, int N);
 void printOmega(std::vector<Code> &Omega);
 
 int main() {
-   const auto size = (unsigned int)pow((float)2,Code::L);
+
+    const auto size = (unsigned int)pow((float)2,Code::getLength());
 
     std::vector<Code> searchSpace(size);
     for (int i = 0; i < size; ++i) {
@@ -23,7 +24,7 @@ int main() {
 
     Monte_Karlo(searchSpace,10);
 
-   /* for (int i = 0; i < size; ++i) {
+   /*for (int i = 0; i < size; ++i) {
         int x = searchSpace[i].getDecNum();
         searchSpace[i].setPreference((x - size / 2) * (x - size / 2));
     }
