@@ -11,17 +11,18 @@
 class Code {
 
     int decNum;
-    int preference;
+    double preference;
     static int L;
 public:
 
     static int hammingDistance(Code& lhs, Code& rhs);
-
+    Code encodeToGray();
+    Code decodeFromGray();
     static int getLength();
     static void setLength(int len);
-    int getPreference() const;
+    double getPreference() const;
 
-    void setPreference(int preference);
+    void setPreference(double preference);
 
     int getDecNum() const;
 
@@ -32,14 +33,14 @@ public:
         preference = 0;
     }
 
-    Code(int decNum, int pref){
+    Code(int decNum, double pref){
         this->decNum = decNum;
         preference = pref;
     }
 
     Code() {
         decNum = 0;
-        preference = 0;
+        preference = 0.0;
     };
 
     friend std::ostream &operator<<(std::ostream &os, const Code &code);
