@@ -21,7 +21,6 @@ int main() {
     for (int i = 0; i < size; ++i) {
         searchSpace[i] = Code(i, i);
     }
-
     maxS = Monte_Karlo(searchSpace,10);
     /*
     for (int i = 0; i < size; ++i) {
@@ -37,16 +36,17 @@ int main() {
     }
     maxS = Hill_Climbing_width(searchSpace, 5);
     */
+    system("pause");
     return 0;
 }
 
 
-//!
+//!  
 //! \param sSpace
 //! \param N
 Code Monte_Karlo(std::vector<Code>& sSpace, int N)
 {
-    if(sSpace.empty()) return {};
+    if(sSpace.empty()) return Code();
     srand((unsigned int)time(nullptr));
     Code maxS;
     int max = 0;
@@ -87,7 +87,7 @@ Code Monte_Karlo(std::vector<Code>& sSpace, int N)
 //! \param sSpace
 //! \param N
 Code Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
-{   if(sSpace.empty()) return {};
+{   if(sSpace.empty()) return Code();
     srand((unsigned int)time(nullptr));
     int i = 0;
     int curr = rand() % sSpace.size();
@@ -141,7 +141,7 @@ Code Hill_Climbing_depth(std::vector<Code>& sSpace, int N)
 //! \param N
 Code Hill_Climbing_width(std::vector<Code>& sSpace, int N)
 {
-    if(sSpace.empty()) return {};
+    if(sSpace.empty()) return Code();
     srand((unsigned int)time(nullptr));
     int i = 0;
     Code maxS = sSpace[rand() % sSpace.size()];

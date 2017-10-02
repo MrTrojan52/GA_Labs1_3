@@ -77,10 +77,10 @@ bool Code::operator<(const Code &rhs) const {
 
 std::vector<Code> Code::getOmega(std::vector<Code> &sSpace) {
     std::vector<Code> Omega;
-    for (auto &i : sSpace) {
-        if((Code::hammingDistance(*this, i) == 1) && (i != *this))
+    for (int i = 0; i < sSpace.size(); ++i) {
+        if((Code::hammingDistance(*this, sSpace[i]) == 1) && (sSpace[i] != *this))
         {
-            Omega.push_back(i);
+            Omega.push_back(sSpace[i]);
         }
     }
     return Omega;
