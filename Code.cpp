@@ -31,12 +31,12 @@ std::ostream &operator<<(std::ostream &os, const Code &code) {
     return os;
 }
 
-int Code::getPreference() const {
+double Code::getPreference() const {
     return preference;
 }
 
-void Code::setPreference(int preference) {
-    Code::preference = preference;
+void Code::setPreference(double preference) {
+    this->preference = preference;
 }
 
 int Code::getDecNum() const {
@@ -93,6 +93,21 @@ int Code::getLength() {
 void Code::setLength(int len) {
     if(len > 0)
         Code::L = len;
+}
+
+Code Code::encodeToGray() {
+    return Code(this->getDecNum() ^ (this->getDecNum() >> 1),this->preference);
+}
+
+Code Code::decodeFromGray() {
+    int i = 1;
+    int b = this->getDecNum();
+    while(i <= Code::getLength() -1)
+    {
+        b = b ^ this->getDecNum() >> i;
+        i++;
+    }
+    return Code(b, this->preference);
 }
 
 
