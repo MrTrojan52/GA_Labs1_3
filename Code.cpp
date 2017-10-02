@@ -20,8 +20,6 @@ std::ostream &operator<<(std::ostream &os, const Code &code) {
             s.insert(s.begin(),'0');
         }
         x = x / 2;
-
-
     }
 
     while(s.size() < Code::L)
