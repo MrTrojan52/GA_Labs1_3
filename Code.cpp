@@ -4,6 +4,7 @@
 
 #include "Code.h"
 
+int Code::L = 5;
 
 std::ostream &operator<<(std::ostream &os, const Code &code) {
     int x = code.decNum;
@@ -78,13 +79,22 @@ bool Code::operator<(const Code &rhs) const {
 
 std::vector<Code> Code::getOmega(std::vector<Code> &sSpace) {
     std::vector<Code> Omega;
-    for (int i = 0; i < sSpace.size(); ++i) {
-        if((Code::hammingDistance(*this,sSpace[i]) == 1) && (sSpace[i] != *this))
+    for (auto &i : sSpace) {
+        if((Code::hammingDistance(*this, i) == 1) && (i != *this))
         {
-            Omega.push_back(sSpace[i]);
+            Omega.push_back(i);
         }
     }
     return Omega;
+}
+
+int Code::getLength() {
+    return Code::L;
+}
+
+void Code::setLength(int len) {
+    if(len > 0)
+        Code::L = len;
 }
 
 
